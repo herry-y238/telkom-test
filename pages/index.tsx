@@ -2,10 +2,22 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
+import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchRepositories } from '../store/actions';
+import { RootState } from '../types';
 
 const inter = Inter({ subsets: ['latin'] })
 
+
 export default function Home() {
+
+  const dispatch = useDispatch();
+  const repositories = useSelector((state: RootState) => state.repositories);
+
+  useEffect(() => {
+    dispatch(fetchRepositories('herry-y238'));
+  }, [dispatch]);
   return (
     <>
       <Head>
@@ -14,7 +26,14 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      
+      <div>
+      <h1>List of Public Repositories</h1>
+      <ul>
+        {repositories.map((repo) => (
+          <li key={repo.id}>{repo.name}</li>
+        ))}
+      </ul>
+    </div>
     </>
   )
 }
