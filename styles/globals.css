@@ -105,3 +105,9 @@ a {
     color-scheme: dark;
   }
 }
+
+/* custom css */
+.title-main {
+  font-weight: bold;
+  text-transform: uppercase;
+}

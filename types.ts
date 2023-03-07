@@ -3,6 +3,8 @@ export interface RootState {
   }
   
   export interface Repository {
+    html_url: string;
     id: number;
     name: string;
+    description: string;
   }

@@ -6,6 +6,15 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchRepositories } from '../store/actions';
 import { RootState } from '../types';
+import { Box, Grid, SimpleGrid, Container, VStack, Center, Table,
+  Thead,
+  Tbody,
+  Tfoot,
+  Tr,
+  Th,
+  Td,
+  TableCaption,
+  TableContainer, } from "@chakra-ui/react"
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,14 +35,38 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div>
-      <h1>List of Public Repositories</h1>
-      <ul>
-        {repositories.map((repo) => (
-          <li key={repo.id}>{repo.name}</li>
-        ))}
-      </ul>
-    </div>
+      <VStack>
+        <Container maxW='container.lg'>
+          <Center h='100px' color='black'>
+            <h2 className='title-main'>List of Public Repositories</h2>
+          </Center>
+        </Container>
+      </VStack>
+
+      <VStack>
+        <Container maxW='container.lg'>
+          <TableContainer>
+            <Table variant='simple'>
+              <Thead>
+                <Tr>
+                  <Th>Title</Th>
+                  <Th>URL</Th>
+                  <Th>Description</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {repositories.map((repo) => (
+                  <Tr key={repo.id}>
+                    <Td>{repo.name}</Td>
+                    <Td><a href={repo.html_url}>{repo.html_url}</a></Td>
+                    <Td>{repo.description}</Td>
+                  </Tr>
+                ))}
+              </Tbody>
+            </Table>
+          </TableContainer>
+        </Container>
+      </VStack>
     </>
   )
 }
